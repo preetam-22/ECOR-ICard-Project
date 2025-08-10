@@ -1,0 +1,115 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background-color: #f9f9f9;
+}
+
+header {
+  background-color: #225a3b;
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.header-left,
+.header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-left img,
+.header-right img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+.head-center span {
+  font-size: 20px;
+  font-weight: bold;
+  color: #f1f1f1;
+}
+
+.container {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 20%;
+  background-color: #f5f5f5;
+  border-right: 1px solid #ccc;
+  padding-top: 10px;
+  height: calc(100vh - 60px);
+  min-height: 300px;
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.sidebar li {
+  padding: 12px 20px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+  /* font-size: 14px; */
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  color: #333;
+  /* padding: 10px 20px; */
+  display: block;
+}
+
+.sidebar ul li a:hover {
+    background-color: #f4f3f3;
+    color: #007bff;
+}
+
+.main-content{
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.card {
+    margin-top: 20px;
+  width: 300px;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.green-card {
+  background-color: #e1f3e1;
+  border: 1px solid #a1dca1;
+}
+
+.red-card {
+  background-color: #f8e0e0;
+  border: 1px solid #e09a9a;
+}
+
+.card a {
+  display: inline-block;
+  margin-top: 10px;
+  text-decoration: underline;
+  color: #007bff;
+}

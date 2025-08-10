@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Online Form for I-Cards</title>
+    <link rel="stylesheet" href="style_.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header-left">
+        <img src="railway_logo.png" class="logo" alt="Railway Logo" />
+        <span>East Coast Railway</span>
+      </div>
+      <div class="head-center">
+        <span>Online form for Id-cards</span>
+      </div>
+      <div class="header-right">
+        <span>Developed by IT Centre</span>
+        <img src="railway_logo.png" class="logo" alt="IT Centre Logo" />
+      </div>
+    </header>
+    <div class="container">
+      <aside class="sidebar">
+        <ul>
+          <li>
+            <a href="index_user.html">🏠 Home</a>
+          </li>
+          <li>
+            <a href="">📝 Apply for new I-card (NG)</a>
+          </li>
+          <li>
+            <a href="index_G.html">📝 Apply for new I-card (GAZ)</a>
+          </li>
+          <li>
+            <a href="index_application.html">🔍 Application details & status</a>
+          </li>
+        </ul>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <section class="form-container">
+          <h3>Employee Registration Form (Non Gazetted)</h3>
+
+          <form
+            action="http://localhost:3000/submit"
+            method="POST"
+            enctype="multipart/form-data"
+          >
+            <input type="hidden" name="familyMembers" id="familyMembers" />
+
+            <input type="hidden" name="gazetted" value="Non-Gazetted" />
+
+            <div class="employee-body">
+              <p><strong style="color: blue">Employee Details:</strong></p>
+              <div class="form-row">
+                <label>Employee Name: <span>*</span></label>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Enter Employee Name"
+                />
+                <label>Designation: <span>*</span></label>
+                <input
+                  type="text"
+                  name="designation"
+                  placeholder="Enter Designation"
+                />
+              </div>
+              <div class="form-row">
+                <label>Employee No: <span>*</span></label>
+                <input
+                  type="text"
+                  name="emp_no"
+                  placeholder="Enter Employee No."
+                />
+                <label>Date of Birth: <span>*</span></label>
+                <input type="date" name="dob" required />
+              </div>
+              <div class="form-row">
+                <label>Department: <span>*</span></label>
+                <select name="department" required>
+                  <option>[SELECT DEPARTMENT]</option>
+                  <option>COMMERCIAL</option>
+                  <option>ELECTRICAL</option>
+                  <option>ENGINEERING</option>
+                  <option>GA</option>
+                  <option>MECHANICAL</option>
+                  <option>MEDICAL</option>
+                  <option>OPERATING</option>
+                  <option>PERSONNEL</option>
+                  <option>RRB</option>
+                  <option>S&T</option>
+                  <option>SAFETY</option>
+                  <option>SECURITY</option>
+                  <option>STORES</option>
+                </select>
+                <label>Station: <span>*</span></label>
+                <input
+                  type="text"
+                  name="station"
+                  value="BHUBANESWAR"
+                  required
+                />
+              </div>
+              <div class="form-row">
+                <label>Bill Unit: <span>*</span></label>
+                <select name="bill_unit" required>
+                  <option>[SELECT BILL UNIT]</option>
+                  <option>3101001</option>
+                  <option>3101002</option>
+                  <option>3101003</option>
+                  <option>3101004</option>
+                  <option>3101010</option>
+                  <option>3101023</option>
+                  <option>3101025</option>
+                  <option>3101026</option>
+                  <option>3101027</option>
+                  <option>3101065</option>
+                  <option>3101066</option>
+                  <option>3101165</option>
+                  <option>3101166</option>
+                  <option>3101285</option>
+                </select>
+                <label>Residential Address:<span>*</span></label>
+                <input
+                  type="text"
+                  name="address"
+                  placeholder="Enter Residential Address"
+                />
+              </div>
+              <div class="form-row">
+                <label>Mobile Number: <span>*</span></label>
+                <input
+                  type="text"
+                  name="mobile"
+                  placeholder="Enter Valid Mobile Number"
+                />
+                <label>Rly Contact Number:<span>*</span></label>
+                <input
+                  type="text"
+                  name="rly_contact"
+                  placeholder="Enter Rly Contact Number"
+                />
+              </div>
+              <div class="form-row" id="Application">
+                <label>Reason for Application: <span>*</span></label>
+                <input type="text" name="reason" placeholder="Enter Reason" />
+              </div>
+            </div>
+
+            <div class="family-section">
+              <p>
+                <strong style="color: blue"
+                  >Details of family members (As per pass rule):</strong
+                >
+              </p>
+
+              <!-- Input Row -->
+              <div class="family-inputs">
+                <input type="text" id="fam_name" placeholder="Name" />
+                <input type="text" id="fam_blood" placeholder="Blood Group" />
+                <input
+                  type="text"
+                  id="fam_relation"
+                  placeholder="Relationship"
+                  value="SELF"
+                />
+                <input type="date" id="fam_dob" placeholder="DOB" />
+                <input
+                  type="text"
+                  id="fam_idmark"
+                  placeholder="Identification mark(s)"
+                />
+                <button type="button" class="add-btn">Add</button>
+              </div>
+
+              <!-- Table -->
+              <table class="family-table">
+                <thead>
+                  <tr>
+                    <th>Sl. No</th>
+                    <th>Name</th>
+                    <th>Blood Group</th>
+                    <th>Relationship</th>
+                    <th>DOB</th>
+                    <th>Identification mark(s)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Dynamic rows will be added here -->
+                </tbody>
+              </table>
+            </div>
+
+            <div class="additional-info">
+              <p><strong style="color: blue">Additional Details:</strong></p>
+              <p>
+                <strong style="color: red">
+                  NOTE: File name should be Employee’s FirstName_photo,
+                  FirstName_sign, etc. (jpg/jpeg/png)<br />
+                  Upload well-scanned Photo and Signature. Avoid uploading
+                  mobile-scanned files and selfies.</strong
+                >
+              </p>
+
+              <div class="emergency-upload-section">
+                <div class="emergency-row">
+                  <div class="form-group">
+                    <label for="emergencyName"
+                      >Emergency Contact Name:
+                      <span class="required">*</span></label
+                    >
+                    <input
+                      type="text"
+                      name="emergency_name"
+                      id="emergencyName"
+                      placeholder="Enter Emergency Contact Name"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="emergencyNumber"
+                      >Emergency Contact Number:
+                      <span class="required">*</span></label
+                    >
+                    <input
+                      type="text"
+                      name="emergency_number"
+                      id="emergencyNumber"
+                      placeholder="Enter Emergency Contact Number"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="photo"
+                    >Upload Photo: <span class="required">*</span></label
+                  >
+                  <input
+                    type="file"
+                    name="photo"
+                    id="photo"
+                    required
+                    accept=".jpg,.jpeg,.png"
+                  />
+                </div>
+                <br />
+                <div class="form-group">
+                  <label for="signature"
+                    >Upload Signature: <span class="required">*</span></label
+                  >
+                  <input type="file" name="signature" id="signature" required />
+                </div>
+                <br />
+              </div>
+            </div>
+
+            <div class="form-buttons">
+              <button type="submit" class="submit-btn">SUBMIT</button>
+              <button type="reset" class="clear-btn">CLEAR</button>
+            </div>
+          </form>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      const familyData = [];
+
+      document.querySelector(".add-btn").addEventListener("click", () => {
+        const inputs = document.querySelectorAll(".family-inputs input");
+        const name = inputs[0].value;
+        const bloodGroup = inputs[1].value;
+        const relationship = inputs[2].value;
+        const dob = inputs[3].value;
+        const idMark = inputs[4].value;
+
+        if (name && bloodGroup && relationship && dob && idMark) {
+          familyData.push({ name, bloodGroup, relationship, dob, idMark });
+
+          const tableBody = document.querySelector(".family-table tbody");
+          const row = document.createElement("tr");
+          row.innerHTML = `
+      <td>${familyData.length}</td>
+      <td>${name}</td>
+      <td>${bloodGroup}</td>
+      <td>${relationship}</td>
+      <td>${dob}</td>
+      <td>${idMark}</td>
+    `;
+          tableBody.appendChild(row);
+
+          document.getElementById("familyMembers").value =
+            JSON.stringify(familyData);
+
+          // Clear fields
+          inputs.forEach((inp, i) => {
+            inp.value = i === 2 ? "SELF" : "";
+          });
+        } else {
+          alert("Please fill all family member fields.");
+        }
+      });
+    </script>
+  </body>
+</html>

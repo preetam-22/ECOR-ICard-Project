@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin</title>
+    <link rel="stylesheet" href="style_admin.css" />
+  </head>
+  <body>
+    
+    <script>
+      // Ensure session still exists on back-navigation
+      fetch("/check-session")
+        .then((res) => res.json())
+        .then((data) => {
+          if (!data.isAdmin) {
+            // ❌ If session not active, redirect to login
+            window.location.replace("/index_user.html");
+          }
+        })
+        .catch(() => {
+          window.location.replace("/index_user.html");
+        });
+    </script>
+
+    <div class="header">
+      <div class="header-left">
+        <img src="railway_logo.png" alt="Railway Logo" />
+        <span>East Coast Railway</span>
+      </div>
+      <div class="head-center">
+        <span>Online form for Id-cards</span>
+      </div>
+      <div class="header-right">
+        <span>Developed by IT Centre</span>
+        <img src="railway_logo.png" alt="IT Centre Logo" />
+      </div>
+    </div>
+    <div class="layout">
+      <aside class="sidebar">
+        <ul>
+          <li><a href="">🏠 Home</a></li>
+          <li>
+            <a href="#" onclick="loadFilteredApplications('Non-Gazetted')"
+              >📝 Pending Applications (NG)</a
+            >
+          </li>
+          <li>
+            <a href="#" onclick="loadFilteredApplications('Gazetted')"
+              >📝 Pending Applications (GAZ)</a
+            >
+          </li>
+          <li>
+            <a href="http://localhost:3000/index_print.html"
+              >🖨️ Print Applications</a
+            >
+          </li>
+          <li><a href="#" id="logoutLink">🔒 Logout</a></li>
+        </ul>
+      </aside>
+      <main class="main">
+        <div id="filterSection">
+          <form class="filter-form">
+            <div>
+              <label for="fromDate">Date From</label>
+              <input type="date" id="fromDate" />
+            </div>
+            <div>
+              <label for="toDate">Date To</label>
+              <input type="date" id="toDate" />
+            </div>
+            <div>
+              <label for="status">Status</label>
+              <select id="status">
+                <option value="">-- Select --</option>
+                <option>Pending</option>
+                <option>Printing (Draft)</option>
+                <option>Printing (To be Sent)</option>
+                <option>Printing (Sent)</option>
+                <option>Closed</option>
+                <option>Rejected</option>
+              </select>
+              <input type="text" class="siNumberInput" placeholder="SI No" style="margin-top: 5px;" />
+            </div>
+            <div>
+              <button
+                type="button"
+                id="submitBtn"
+                onclick="loadApplications()"
+                disabled
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+          <p class="footer-note">
+            <strong
+              >Designed, Developed and Maintained by IT
+              Centre/ECOR/Bhubaneswar</strong
+            >
+          </p>
+        </div>
+        <div class="table-container" id="tableSection" style="display: none">
+          <div
+            id="headerBar"
+            style="
+              display: none;
+              background-color: #215277;
+              color: white;
+              padding: 10px 20px;
+              align-items: center;
+              justify-content: space-between;
+            "
+          >
+            <h3 id="tableTitle" style="margin: 0">
+              Gazetted I-Card Application List
+            </h3>
+            <!-- <div>
+              <button
+                id="printBtn"
+                style="background: none; border: none; cursor: pointer"
+              >
+                🖨️ <span style="color: white">Print</span>
+              </button>
+              <button
+                id="excelBtn"
+                style="background: none; border: none; cursor: pointer"
+              >
+                📥 <span style="color: white">Excel</span>
+              </button>
+            </div> -->
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Sl No</th>
+                <th>Emp No</th>
+                <th>Name</th>
+                <th>Designation</th>
+                <th>DOB</th>
+                <th>Department</th>
+                <th>Station</th>
+                <th>Bill Unit</th>
+                <th>Address</th>
+                <th>Mobile</th>
+                <th>Emergency Name</th>
+                <th>Emergency No</th>
+                <th>Application Date</th>
+                <th>Photo</th>
+                <th>Signature</th>
+                <th>QR Code</th>
+                <th colspan="30">Family Details</th>
+                <th>Status</th>
+                <th>Update</th>
+                <th>View</th>
+                <th>Download</th>
+              </tr>
+            </thead>
+            <tbody id="appBody">
+              <!-- JS injects rows here -->
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+
+    <div
+      id="previewModal"
+      style="
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 20px;
+        border: 2px solid #444;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        z-index: 9999;
+        width: 900px;
+        max-height: 90vh;
+        overflow: auto;
+        border-radius: 8px;
+      "
+    >
+      <button
+        onclick="closeModal()"
+        style="
+          float: right;
+          background: #c62828;
+          color: white;
+          border: none;
+          padding: 4px 10px;
+          cursor: pointer;
+        "
+      >
+        X
+      </button>
+      <div id="previewContent"></div>
+    </div>
+    <div
+      id="modalBackdrop"
+      style="
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 9990;
+      "
+    ></div>
+
+    <script src="script_admin.js"></script>
+  </body>
+</html>

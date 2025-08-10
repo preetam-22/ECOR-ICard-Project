@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Online Form for I-cards</title>
+    <link rel="stylesheet" href="style_print.css" />
+  </head>
+
+  <body>
+    <script>
+      // Ensure session still exists on back-navigation
+      fetch("/check-session")
+        .then((res) => res.json())
+        .then((data) => {
+          if (!data.isAdmin) {
+            // ❌ If session not active, redirect to login
+            window.location.replace("/index_user.html");
+          }
+        })
+        .catch(() => {
+          // In case of any error, redirect too
+          window.location.replace("/index_user.html");
+        });
+    </script>
+
+    <header>
+      <div class="header-left">
+        <img src="railway_logo.png" alt="Railway Logo" />
+        <span>East Coast Railway</span>
+      </div>
+      <div class="head-center">
+        <span>Online form for Id-cards</span>
+      </div>
+      <div class="header-right">
+        <span>Developed by IT Centre</span>
+        <img src="railway_logo.png" alt="IT Centre Logo" />
+      </div>
+    </header>
+
+    <div class="container">
+      <aside class="sidebar">
+        <ul>
+          <li><a href="index_admin.html">🏠 Home</a></li>
+          <!-- <li>
+            <a href="#" onclick="loadFilteredApplications('Non-Gazetted')"
+              >📝 Pending Applications (NG)</a
+            >
+          </li>
+          <li>
+            <a href="#" onclick="loadFilteredApplications('Gazetted')"
+              >📝 Pending Applications (GAZ)</a
+            >
+          </li> -->
+          <li><a href="">🖨️ Print Applications</a></li>
+          <!-- <li><a href="#" id="logoutLink">🔒 Logout</a></li> -->
+        </ul>
+      </aside>
+
+      <main class="main-content">
+        <div class="card green-card">
+          <h3>Print Application (Non Gaz)</h3>
+          <a href="#" onclick="printApplication('Non-Gazetted')">Click here</a>
+        </div>
+        <div class="card red-card">
+          <h3>Print Application (Gaz)</h3>
+          <a href="#" onclick="printApplication('Gazetted')">Click here</a>
+        </div>
+      </main>
+    </div>
+
+    <script src="script_admin.js"></script>
+  </body>
+</html>

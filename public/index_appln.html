@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>I-Card Portal</title>
+    <link rel="stylesheet" href="style_appln.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header-left">
+        <img src="railway_logo.png" alt="Railway Logo" />
+        <span>East Coast Railway</span>
+      </div>
+      <div class="head-center">
+        <span>Online form for Id-cards</span>
+      </div>
+      <div class="header-right">
+        <span>Developed by IT Centre</span>
+        <img src="railway_logo.png" alt="IT Centre Logo" />
+      </div>
+    </header>
+
+    <div class="container">
+      <aside class="sidebar">
+        <ul>
+          <li><a href="index_user.html">🏠 Home</a></li>
+          <li><a href="index_NG.html">📝 Apply for new I-card (NG)</a></li>
+          <li><a href="index_G.html">📝 Apply for new I-card (GAZ)</a></li>
+          <li>
+            <a href="index_appln.html">🔍 Application details & status</a>
+          </li>
+        </ul>
+      </aside>
+
+      <main class="main-content">
+        <!-- ✅ Gazetted box -->
+        <div class="status-box green-box">
+          <h3>Application Status (Gaz)</h3>
+          <input type="text" id="gazId" placeholder="Enter Application ID" />
+          <input type="date" id="gazDob" placeholder="Enter DOB" />
+          <button type="button" onclick="checkStatusGaz(event)">Submit</button>
+          <div id="gazResult" class="status-output" style="margin-top: 15px; font-weight: bold;"></div>
+        </div>
+
+        <div class="status-box red-box">
+          <h3>Application Status (Non Gaz)</h3>
+          <input type="text" id="nonGazId" placeholder="Enter Application ID" />
+          <input type="date" id="nonGazDob" placeholder="Enter DOB" />
+          <button type="button" onclick="checkStatusNonGaz(event)">Submit</button>
+          <div id="nonGazResult" class="status-output" style="margin-top: 15px; font-weight: bold;"></div>
+        </div>
+      </main>
+    </div>
+
+    <script>
+  async function checkStatusGaz() {
+    const empNo = document.getElementById("gazId").value.trim();
+    const dob = document.getElementById("gazDob").value;
+
+    if (!empNo || !dob) {
+      showResult("gazResult", "❌ Please fill all fields", false);
+      return;
+    }
+
+    const res = await fetch(`/api/status-check?emp_no=${empNo}&dob=${dob}`);
+    const data = await res.json();
+
+    if (data.success) {
+      if (data.gazetted === "Gazetted") {
+        showResult("gazResult", `✅ Application Status: ${data.status}`, true);
+      } else {
+        showResult("gazResult", "❌ This is a Non-Gazetted application", false);
+      }
+    } else {
+      showResult("gazResult", "❌ No matching application found", false);
+    }
+  }
+
+  async function checkStatusNonGaz() {
+    const empNo = document.getElementById("nonGazId").value.trim();
+    const dob = document.getElementById("nonGazDob").value;
+
+    if (!empNo || !dob) {
+      showResult("nonGazResult", "❌ Please fill all fields", false);
+      return;
+    }
+
+    const res = await fetch(`/api/status-check?emp_no=${empNo}&dob=${dob}`);
+    const data = await res.json();
+
+    if (data.success) {
+      if (data.gazetted === "Non-Gazetted") {
+        showResult("nonGazResult", `✅ Application Status: ${data.status}`, true);
+      } else {
+        showResult("nonGazResult", "❌ This is a Gazetted application", false);
+      }
+    } else {
+      showResult("nonGazResult", "❌ No matching application found", false);
+    }
+  }
+
+  function showResult(elementId, message, isSuccess) {
+    const el = document.getElementById(elementId);
+    el.style.color = isSuccess ? "green" : "red";
+    el.innerHTML = message;
+  }
+</script>
+
+
+    <!-- <footer>
+      <p>&copy; 2023 East Coast Railway. All rights reserved.</p>
+    </footer> -->
+  </body>
+</html>

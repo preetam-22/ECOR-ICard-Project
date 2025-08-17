@@ -23,12 +23,12 @@ A full-stack web application crafted for streamlined handling of gazetted and no
 
 ## Key Features
 
--   Dual-mode application: **Gazetted** & **Non-Gazetted** forms\
--   Admin portal with session-based authentication\
--   Application filtering by status and category\
--   Update workflow with optional SI number injection\
--   PDF generation with employee data, QR code, and embedded photos\
--   Users can check status via Employee ID and DOB\
+-   Dual-mode application: **Gazetted** & **Non-Gazetted** forms
+-   Admin portal with session-based authentication
+-   Application filtering by status and category
+-   Update workflow with optional SI number injection
+-   PDF generation with employee data, QR code, and embedded photos
+-   Users can check status via Employee ID and DOB
 -   Secure session handling and UI practices
 
 ------------------------------------------------------------------------
@@ -129,15 +129,15 @@ require("dotenv").config();
 
 ### Admin Workflow:
 
-1.  Log in via `/index_login.html`\
-2.  View pending applications (Gaz / Non-Gaz)\
-3.  Update application, optionally adding SI number when closing\
+1.  Log in via `/index_login.html`
+2.  View pending applications (Gaz / Non-Gaz)
+3.  Update application, optionally adding SI number when closing
 4.  Preview and download the I-Card PDF
 
 ### User Workflow:
 
-1.  Visit `/index_user.html`\
-2.  Enter Employee ID + DOB in the correct category\
+1.  Visit `/index_user.html`
+2.  Enter Employee ID + DOB in the correct category
 3.  Status is displayed (Pending, Closed, etc.), or errors for mismatches
 
 ------------------------------------------------------------------------
@@ -157,7 +157,8 @@ require("dotenv").config();
 
   GET      `/api/preview/:id`        Retrieve HTML preview
 
-  GET      `/api/print-all/:type`    Generate bulk print view (`Gazetted` or`Non-Gaz`)
+  GET      `/api/print-all/:type`    Generate bulk print view (`Gazetted` or `Non-Gaz`)
+
   --------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
